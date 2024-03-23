@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import React from 'react';
 
 
-export default function Dashboard({ auth }) {
+export default function AdminDashboard({ auth }) {
     return (
         <AdminLayout
             user={auth.user}

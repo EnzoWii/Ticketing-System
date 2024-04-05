@@ -34,6 +34,10 @@ Route::get('/faq', function () {
     return Inertia::render('FAQ');
 })->middleware(['auth', 'verified'])->name('FAQ');
 
+Route::get('/tickets', function () {
+    return Inertia::render('Tickets');
+})->middleware(['auth', 'verified'])->name('Tickets');
+
 Route::get('/admin-dashboard', function () {
     return Inertia::render('AdminDashboard');
 })->middleware(['auth', 'verified'])->name('admindashboard');

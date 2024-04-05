@@ -33,6 +33,11 @@ Route::get('/dashboard', function () {
 Route::get('/faq', function () {
     return Inertia::render('FAQ');
 })->middleware(['auth', 'verified'])->name('FAQ');
+
+Route::get('/facilitator-dashboard', function () {
+    return Inertia::render('LabDashboard');
+})->middleware(['auth', 'verified'])->name('LabDashboard');
+
 Route::get('/cms', function () {
     return Inertia::render('CMSPage');
 })->middleware(['auth', 'verified'])->name('cms');

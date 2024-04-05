@@ -48,6 +48,14 @@ Route::get('/cms', function () {
 Route::get('/admin-dashboard', function () {
     return Inertia::render('AdminDashboard');
 })->middleware(['auth', 'verified'])->name('admindashboard');
+Route::get('/cms', [ArticleController::class, 'index'])->name('articles.index');
+Route::post('/cms', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->middleware(['auth', 'verified'])->name('article.show');
+
+
+Route::get('/tickets', function () {
+    return Inertia::render('Tickets');
+})->middleware(['auth', 'verified'])->name('Tickets');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

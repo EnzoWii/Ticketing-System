@@ -1,10 +1,11 @@
 import React from 'react'
-
-function FAQ() {
+import Authenticated from '@/Layouts/AuthenticatedLayout'
+import Subherofaq from '@/Components/subherofaq'
+function FAQ({auth}) {
   return (
-    <div>
-      hello
-    </div>
+   <Authenticated  user={auth.user}>
+        <Subherofaq />
+   </Authenticated>
   )
 }
 

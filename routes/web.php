@@ -33,6 +33,9 @@ Route::get('/dashboard', function () {
 Route::get('/faq', function () {
     return Inertia::render('FAQ');
 })->middleware(['auth', 'verified'])->name('FAQ');
+Route::get('/cms', function () {
+    return Inertia::render('CMSPage');
+})->middleware(['auth', 'verified'])->name('cms');
 
 Route::get('/admin-dashboard', function () {
     return Inertia::render('AdminDashboard');
@@ -44,4 +47,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

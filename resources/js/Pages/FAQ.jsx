@@ -1,10 +1,16 @@
 import React from 'react'
-
-function FAQ() {
+import Authenticated from '@/Layouts/AuthenticatedLayout'
+import Subherofaq from '@/Components/subherofaq'
+function FAQ({auth}) {
   return (
-    <div>
-      hello
+   <Authenticated  user={auth.user}>
+    <div className='flex w-full'>
+        <div className='w-[80%]'><Subherofaq /></div>
+        <div>
+            hello
+        </div>
     </div>
+   </Authenticated>
   )
 }
 

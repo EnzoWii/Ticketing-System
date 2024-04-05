@@ -12,9 +12,9 @@ export default function Dashboard({ auth }) {
             <Head title="Dashboard" />
 
             <div className='bg-white'>
-            <Subhero></Subhero>
+            <Subhero />
             </div>
-            
+
         </AuthenticatedLayout>
     );
 }

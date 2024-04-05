@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ImageController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,6 +28,11 @@ Route::get('/', function () {
     ]);
 });
 
+// routes/web.php
+
+Route::post('/upload-image', [ImageController::class, 'upload'])->name('upload.image');
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -33,18 +41,9 @@ Route::get('/dashboard', function () {
 Route::get('/faq', function () {
     return Inertia::render('FAQ');
 })->middleware(['auth', 'verified'])->name('FAQ');
-
-Route::get('/facilitator-dashboard', function () {
-    return Inertia::render('LabDashboard');
-})->middleware(['auth', 'verified'])->name('LabDashboard');
-
 Route::get('/cms', function () {
     return Inertia::render('CMSPage');
 })->middleware(['auth', 'verified'])->name('cms');
-
-Route::get('/tickets', function () {
-    return Inertia::render('Tickets');
-})->middleware(['auth', 'verified'])->name('Tickets');
 
 Route::get('/admin-dashboard', function () {
     return Inertia::render('AdminDashboard');

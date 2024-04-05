@@ -83,43 +83,6 @@ function SubHero() {
               ))}
             </div>
           </div>
-
-          {/* Ticket Submission Section */}
-          <div className="mt-10 bg-gray-100 p-6 rounded-lg">
-            <h2 className="font-bold text-2xl mb-4 text-gray-800">Submit a Ticket</h2>
-            <button onClick={() => setIsTicketModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Create a Ticket</button>
-          </div>
-
-          {/* Ticket Submission Modal */}
-          {isTicketModalOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-50">
-              <div className="bg-white p-8 rounded-lg w-full sm:w-96">
-                <h2 className="font-bold text-2xl mb-4 text-gray-800">Submit a Ticket</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <input type="text" id="name" name="name" value={ticketFormData.name} onChange={handleInputChange} placeholder="Name" className="w-full border border-gray-300 p-2 rounded-md" required />
-                  </div>
-                  <div>
-                    <input type="email" id="email" name="email" value={ticketFormData.email} onChange={handleInputChange} placeholder="Email" className="w-full border border-gray-300 p-2 rounded-md" required />
-                  </div>
-                  <div>
-                    <select id="category" name="category" value={ticketFormData.category} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-md">
-                      <option value="">Select Category</option>
-                      <option value="assets">Assets</option>
-                      <option value="technical">Technical</option>
-                      <option value="accounts">Accounts</option>
-                      <option value="network">Network</option>
-                    </select>
-                  </div>
-                  <div>
-                    <textarea id="issue" name="issue" value={ticketFormData.issue} onChange={handleInputChange} rows="4" placeholder="Issue Description" className="w-full border border-gray-300 p-2 rounded-md" required></textarea>
-                  </div>
-                  <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-900 transition-colors">Submit</button>
-                  <button onClick={() => setIsTicketModalOpen(false)} className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors">Cancel</button>
-                </form>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>

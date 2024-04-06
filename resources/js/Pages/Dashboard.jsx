@@ -1,20 +1,23 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
 import React from 'react';
 import Subhero from '@/Components/subhero';
 import STI from '@/Components/images/sticomputer.jpg'
+import UserDashboard from './UserDashboard';
+import LabDashboard from './LabDashboard';
+import AdminDashboard from './AdminDashboard';
 
 export default function Dashboard({ auth }) {
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-        >
-            <Head title="Dashboard" />
+       <div>
+        {
+            auth.user.roles == 'users' && <UserDashboard auth={auth}/>
 
-            <div className='bg-white'>
-            <Subhero />
-            </div>
-
-        </AuthenticatedLayout>
+        }
+        {
+            auth.user.roles == 'facilitators' && <LabDashboard auth={auth}/>
+        }
+         {
+            auth.user.roles == 'admin' && <AdminDashboard auth={auth}/>
+        }
+       </div>
     );
 }

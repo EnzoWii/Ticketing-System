@@ -1,6 +1,5 @@
-// src/App.js
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import React, { useState } from 'react';
+import FacilitatorLayout from '@/Layouts/facilitatorLayout';
 
 function Tickets({ auth }) {
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
@@ -8,7 +7,8 @@ function Tickets({ auth }) {
     category: '',
     issueType: '',
     issue: '',
-    attachment: null
+    attachment: null,
+    title: '' // Adding title field to the ticket form data
   });
 
   const handleInputChange = (e) => {
@@ -33,7 +33,7 @@ function Tickets({ auth }) {
 
   return (
     <>
-      <AuthenticatedLayout user={auth.user}>
+      <FacilitatorLayout user={auth.user}>
         <div className="bg-gray-100 min-h-screen p-8">
           <header className="bg-blue-500 text-white text-center py-4">
             <h1 className="text-3xl font-bold">TICKETS</h1>
@@ -52,10 +52,10 @@ function Tickets({ auth }) {
             </thead>
             <tbody>
               <tr>
-                <td className="px-4 py-2 border border-black text-center">Test Department</td>
+                <td className="px-4 py-2 border border-black text-center">Test Department 1</td>
                 <td className="px-4 py-2 border border-black text-center">01/22/24</td>
-                <td className="px-4 py-2 border border-black text-center">Test Title</td>
-                <td className="px-4 py-2 border border-black text-center">Test Assigned</td>
+                <td className="px-4 py-2 border border-black text-center">Test Title 1</td>
+                <td className="px-4 py-2 border border-black text-center">Test Assigned 1</td>
                 <td className="px-4 py-2 border border-black text-center">Low</td>
                 <td className="px-4 py-2 border border-black text-center">
                   <span className="bg-green-500 text-white rounded-full px-2 py-1">
@@ -64,26 +64,26 @@ function Tickets({ auth }) {
                 </td>
               </tr>
               <tr>
-                <td className="px-4 py-2 border border-black text-center">Another Department</td>
-                <td className="px-4 py-2 border border-black text-center">04/30/24</td>
-                <td className="px-4 py-2 border border-black text-center">Another Title</td>
-                <td className="px-4 py-2 border border-black text-center">Another Assigned</td>
-                <td className="px-4 py-2 border border-black text-center">High</td>
-                <td className="px-4 py-2 border border-black text-center">
-                  <span className="bg-red-500 text-white rounded-full px-2 py-1">
-                    Closed
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td className="px-4 py-2 border border-black text-center">Ongoing Department</td>
-                <td className="px-4 py-2 border border-black text-center">04/05/24</td>
-                <td className="px-4 py-2 border border-black text-center">Ongoing Task</td>
-                <td className="px-4 py-2 border border-black text-center">Assigned Person</td>
+                <td className="px-4 py-2 border border-black text-center">Test Department 2</td>
+                <td className="px-4 py-2 border border-black text-center">02/12/24</td>
+                <td className="px-4 py-2 border border-black text-center">Test Title 2</td>
+                <td className="px-4 py-2 border border-black text-center">Test Assigned 2</td>
                 <td className="px-4 py-2 border border-black text-center">Medium</td>
                 <td className="px-4 py-2 border border-black text-center">
                   <span className="bg-yellow-500 text-white rounded-full px-2 py-1">
                     Ongoing
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 border border-black text-center">Test Department 3</td>
+                <td className="px-4 py-2 border border-black text-center">03/05/24</td>
+                <td className="px-4 py-2 border border-black text-center">Test Title 3</td>
+                <td className="px-4 py-2 border border-black text-center">Test Assigned 3</td>
+                <td className="px-4 py-2 border border-black text-center">High</td>
+                <td className="px-4 py-2 border border-black text-center">
+                  <span className="bg-red-500 text-white rounded-full px-2 py-1">
+                    Closed
                   </span>
                 </td>
               </tr>
@@ -101,6 +101,9 @@ function Tickets({ auth }) {
               <div className="bg-white p-8 rounded-lg w-full sm:w-96">
                 <h2 className="font-bold text-2xl mb-4 text-gray-800">Submit a Ticket</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <input type="text" id="title" name="title" value={ticketFormData.title} onChange={handleInputChange} placeholder="Title" className="w-full border border-gray-300 p-2 rounded-md" />
+                  </div>
                   <div>
                     <select id="category" name="category" value={ticketFormData.category} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-md" required>
                       <option value="">Select Category</option>
@@ -132,7 +135,7 @@ function Tickets({ auth }) {
             </div>
           )}
         </div>
-      </AuthenticatedLayout>
+      </FacilitatorLayout>
     </>
   );
 }

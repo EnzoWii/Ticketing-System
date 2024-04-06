@@ -7,7 +7,6 @@ export default function AdminDashboard({ auth }) {
     return (
         <AdminLayout
             user={auth.user}
-
         >
             <Head title="Dashboard" />
 

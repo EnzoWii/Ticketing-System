@@ -12,6 +12,9 @@ const RichTextEditor = () => {
       title: title,
       content: editorHtml
     });
+
+
+    window.location.reload()
   };
 
   const handleTitleChange = (e) => {

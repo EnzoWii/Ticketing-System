@@ -41,21 +41,38 @@ Route::get('/dashboard', function () {
 Route::get('/faq', function () {
     return Inertia::render('FAQ');
 })->middleware(['auth', 'verified'])->name('FAQ');
-Route::get('/cms', function () {
-    return Inertia::render('CMSPage');
-})->middleware(['auth', 'verified'])->name('cms');
+
+Route::get('/facilitator-tickets', function () {
+    return Inertia::render('LabTickets');
+})->middleware(['auth', 'verified', 'role:facilitators'])->name('LabTickets');
+
+Route::get('/facilitator-faq', function () {
+    return Inertia::render('LabFAQ');
+})->middleware(['auth', 'verified', 'role:facilitators'])->name('LabFAQ');
+
+Route::get('/facilitator-dashboard', function () {
+    return Inertia::render('LabDashboard');
+})->middleware(['auth', 'verified', 'role:facilitators'])->name('LabDashboard');
+
+
 
 Route::get('/admin-dashboard', function () {
     return Inertia::render('AdminDashboard');
-})->middleware(['auth', 'verified'])->name('admindashboard');
-Route::get('/cms', [ArticleController::class, 'index'])->name('articles.index');
-Route::post('/cms', [ArticleController::class, 'store'])->name('articles.store');
+})->middleware(['auth', 'verified', 'role:admin'])->name('AdminDashboard');
+
+Route::get('/cms', [ArticleController::class, 'index'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.index');
+
+Route::post('/cms', [ArticleController::class, 'store'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.store');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->middleware(['auth', 'verified'])->name('article.show');
 
 
 Route::get('/tickets', function () {
     return Inertia::render('Tickets');
 })->middleware(['auth', 'verified'])->name('Tickets');
+
+Route::get('/ticket-show', function () {
+    return Inertia::render('TicketShow');
+})->middleware(['auth', 'verified'])->name('TicketShow');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

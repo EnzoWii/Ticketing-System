@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RichTextEditor from '@/Components/RichTextEditor';
 import ImageUploader from '@/Components/ImageUploader';
-import Authenticated from '@/Layouts/AuthenticatedLayout';
+import Authenticated from '@/Layouts/facilitatorLayout';
 import { Inertia } from '@inertiajs/inertia';
 import { PencilIcon, Trash, ViewIcon } from 'lucide-react';
 const CMSPage = ({ auth, articles }) => {

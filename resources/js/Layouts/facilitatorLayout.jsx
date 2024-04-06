@@ -24,6 +24,15 @@ export default function facilitatorLayout({ user, header, children }) {
                                 <NavLink href={route('LabDashboard')} active={route().current('LabDashboard')}>
                                     Dashboard
                                 </NavLink>
+                                <NavLink href={route('LabFAQ')} active={route().current('LabFAQ')}>
+                                    FAQ
+                                </NavLink>
+                                <NavLink href={route('articles.index')} active={route().current('articles.index')}>
+                                    CMS
+                                </NavLink>
+                                <NavLink href={route('LabTickets')} active={route().current('LabTickets')}>
+                                    Tickets
+                                </NavLink>
                             </div>
                         </div>
 

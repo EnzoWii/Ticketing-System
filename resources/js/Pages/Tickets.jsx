@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FacilitatorLayout from '@/Layouts/facilitatorLayout';
+import FacilitatorLayout from '@/Layouts/AuthenticatedLayout';
 
 function Tickets({ auth }) {
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);

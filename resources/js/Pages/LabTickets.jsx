@@ -3,13 +3,8 @@ import FacilitatorLayout from '@/Layouts/facilitatorLayout';
 
 function Tickets({ auth }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
-  const [ticketFormData, setTicketFormData] = useState({
-    category: '',
-    issueType: '',
-    issue: '',
-    attachment: null
-  });
+  const [numTicketsReceived, setNumTicketsReceived] = useState(0); // State for number of tickets received today
+  const [maxTickets, setMaxTickets] = useState(100); // State for maximum tickets setting
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,8 +33,24 @@ function Tickets({ auth }) {
   return (
     <>
       <FacilitatorLayout user={auth.user}>
-      <div className="bg-gray-100 min-h-screen p-8">
-          <div className="flex justify-between mt-8">
+        <div className="bg-gray-100 min-h-screen p-8">
+          {/* Display number of tickets received today and set max tickets */}
+          <div className="flex justify-between mb-4">
+            <div>
+              <p className="text-lg font-semibold mb-1">Tickets Received Today: {numTicketsReceived}</p>
+              <p className="text-sm">Set Max Tickets Per Day:</p>
+              <input
+                type="number"
+                min={1}
+                value={maxTickets}
+                onChange={(e) => setMaxTickets(parseInt(e.target.value))}
+                className="w-24 border border-gray-300 p-1 rounded-md"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-between mt-4">
+            {/* Ticket table */}
             <table className="w-full border border-collapse border-black">
               <thead>
                 <tr>

@@ -42,6 +42,7 @@ function Tickets({ auth }) {
           <table className="w-full mt-8 border border-collapse border-black">
             <thead>
               <tr>
+              <th className="px-4 py-2 border border-black text-center">Ticket ID</th>
                 <th className="px-4 py-2 border border-black text-center">Department</th>
                 <th className="px-4 py-2 border border-black text-center">Date</th>
                 <th className="px-4 py-2 border border-black text-center">Subject</th>
@@ -52,6 +53,7 @@ function Tickets({ auth }) {
             </thead>
             <tbody>
               <tr>
+              <td className="px-4 py-2 border border-black text-center">1</td>
                 <td className="px-4 py-2 border border-black text-center">Test Department 1</td>
                 <td className="px-4 py-2 border border-black text-center">01/22/24</td>
                 <td className="px-4 py-2 border border-black text-center">Test Title 1</td>
@@ -64,6 +66,7 @@ function Tickets({ auth }) {
                 </td>
               </tr>
               <tr>
+              <td className="px-4 py-2 border border-black text-center">2</td>
                 <td className="px-4 py-2 border border-black text-center">Test Department 2</td>
                 <td className="px-4 py-2 border border-black text-center">02/12/24</td>
                 <td className="px-4 py-2 border border-black text-center">Test Title 2</td>
@@ -76,6 +79,7 @@ function Tickets({ auth }) {
                 </td>
               </tr>
               <tr>
+              <td className="px-4 py-2 border border-black text-center">3</td>
                 <td className="px-4 py-2 border border-black text-center">Test Department 3</td>
                 <td className="px-4 py-2 border border-black text-center">03/05/24</td>
                 <td className="px-4 py-2 border border-black text-center">Test Title 3</td>

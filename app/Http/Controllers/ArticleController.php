@@ -31,11 +31,13 @@ class ArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'subtext' => 'required|string',
             'content' => 'required',
         ]);
 
         Article::create([
             'title' => $request->title,
+            'subtext' => $request->subtext,
             'content' => $request->content,
         ]);
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import STILogo from '@/Components/STILogo';
+import STIBacoorLogo from '.././Assets/STIBacoorLogo.gif';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
@@ -15,8 +15,8 @@ export default function Authenticated({ user, header, children }) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <STILogo className="block h-5 w-5 fill-current text-gray-800" />
+                                <Link href="/" >
+                                    <img src={STIBacoorLogo} alt="STI Bacoor Logo" className='w-20'/>
                                 </Link>
                             </div>
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import FacilitatorLayout from '@/Layouts/facilitatorLayout';
+import { CustomKanban } from '@/Components/CustomKanban';
 
-function LabDashboard({ auth }) {
+function LabDashboard({ auth, tickets }) {
   // Sample data for unresolved items
+  console.log(tickets)
   const unresolvedItems = {
     assets: 10,
     network: 5,
@@ -24,6 +26,7 @@ function LabDashboard({ auth }) {
 
   return (
     <FacilitatorLayout user={auth.user}>
+       <CustomKanban tickets={tickets}/>
       <div className="flex">
         <div className="w-full lg:w-1/3 border border-gray-400 p-4">
           <div className="mb-4">
@@ -84,6 +87,8 @@ function LabDashboard({ auth }) {
           </div>
         </div>
       </div>
+
+     
     </FacilitatorLayout>
   );
 }

@@ -4,7 +4,8 @@ import { Link } from '@inertiajs/react'
 import helpdeskimage from '../../../public/images/helpdeskimg.svg'
 import Cards from '@/Components/Cards'
 import { motion } from 'framer-motion';
-function Welcome({ latestArticle }) {
+function Welcome({ latestArticle, auth }) {
+    console.log(auth)
     const [showScrollButton, setShowScrollButton] = useState(false);
     console.log(latestArticle)
     useEffect(() => {
@@ -37,7 +38,7 @@ function Welcome({ latestArticle }) {
         { question: 'Is the ticketing system available 24/7?', answer: `The availability of the ticketing system at STI College Bacoor may vary depending on their IT department's operating hours. It's recommended to check with the college's IT department for specific details on when the system is accessible for submitting tickets.` },
         { question: 'Can I track the progress of my ticket?', answer: `You can monitor your ticket's progress through the IT helpdesk system at STI College Bacoor, ensuring you stay informed about any updates or resolutions to your reported issue. This feature enables you to stay engaged and aware of the status of your request.` },
         { question: 'How long does it take to resolve a ticket?', answer: `The time it takes to resolve a ticket at STI College Bacoor's IT helpdesk may vary depending on factors such as the complexity of the issue and the current workload. Typically, the IT team strives to address tickets promptly, aiming to provide timely resolutions to reported problems.
-            
+
         ` },
         // Add more FAQs as needed
     ];
@@ -51,12 +52,14 @@ function Welcome({ latestArticle }) {
     return (
         <>
 
-            <div className='w-full bg-white h-16 flex justify-between items-center '>
+            <div className='w-full bg-slate-100 pt-10 h-16 flex justify-between items-center '>
                 <div className='ml-20'>
                     <img src={STIBacoorLogo} className='w-20 ' />
                 </div>
                 <div className='mr-20'>
-                    <Link href={route('login')} className=' bg-blue-900 text-white px-12 py-2 rounded-md'>SIGN IN</Link>
+                  { auth.user == null && <Link href={route('login')} className=' bg-blue-900 text-white px-12 py-2 rounded-md'>SIGN IN</Link>}
+                  { auth.user != null && <Link href={route('login')} className=' bg-blue-900 text-white px-4 py-2 rounded-md'>Go to Dashboard</Link>}
+
                 </div>
             </div>
             <div className='w-full bg-slate-100 h-[90vh] flex items-center'>
@@ -80,7 +83,10 @@ function Welcome({ latestArticle }) {
                 <div className='flex justify-center flex-wrap gap-8 mt-10'>
                     {
                         latestArticle.map((article) => {
-                            return <Cards title={article.title} subtext='Streamline workload with our ticketing system.' />
+                            return <a href={`/articles/${article.id}`} className='w-[22%]'>
+                            <Cards image={article.image} title={article.title} subtext={article.subtext} />
+
+                            </a>
                         })
                     }
 
@@ -112,12 +118,13 @@ function Welcome({ latestArticle }) {
 
             {showScrollButton &&
                 <motion.div
-                    initial={{ opacity: 0, y: 40, scale: 0 }}
-                    animate={{ opacity: showScrollButton ? 1 : 0, y: showScrollButton ? 0 : 40, scale: showScrollButton ? 1 : 0 }}
-                    exit={{ opacity: 0, y: 40 }}
-                    transition={{
-                        duration: 0.2
-                    }} className='fixed  bottom-5 left-10 bg-blue-900  text-white px-2 py-1 rounded-md cursor-pointer' onClick={scrollToTop}>
+                    initial={{ opacity: 0, y: 50, scale: 0 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 50, scale: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className='fixed bottom-5 left-10 bg-blue-900 text-white px-2 py-1 rounded-md cursor-pointer'
+                    onClick={scrollToTop}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                     </svg>

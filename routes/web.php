@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ImageController;
 
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\DashboardController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,7 +21,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 Route::get('/', [ArticleController::class, 'getFive'])->name('welcome');
 
 // routes/web.php
@@ -26,9 +29,7 @@ Route::get('/', [ArticleController::class, 'getFive'])->name('welcome');
 Route::post('/upload-image', [ImageController::class, 'upload'])->name('upload.image');
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',  [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //test
 Route::get('/faq', function () {
@@ -43,9 +44,7 @@ Route::get('/facilitator-faq', function () {
     return Inertia::render('LabFAQ');
 })->middleware(['auth', 'verified', 'role:facilitators'])->name('LabFAQ');
 
-Route::get('/facilitator-dashboard', function () {
-    return Inertia::render('LabDashboard');
-})->middleware(['auth', 'verified', 'role:facilitators'])->name('LabDashboard');
+Route::get('/facilitator-dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'role:facilitators'])->name('LabDashboard');
 
 
 
@@ -56,12 +55,15 @@ Route::get('/admin-dashboard', function () {
 Route::get('/cms', [ArticleController::class, 'index'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.index');
 
 Route::post('/cms', [ArticleController::class, 'store'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.store');
+Route::put('/article/{id}', [ArticleController::class, 'update'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.update');
+Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->middleware(['auth', 'verified', 'role:facilitators'])->name('article.destroy');
+
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->middleware(['auth', 'verified'])->name('article.show');
 
 
-Route::get('/tickets', function () {
-    return Inertia::render('Tickets');
-})->middleware(['auth', 'verified'])->name('Tickets');
+Route::get('/tickets', [TicketController::class, 'index'])->middleware(['auth', 'verified'])->name('Tickets');
+Route::put('/tickets/{id}', [TicketController::class, 'updateColumn'])->middleware(['auth', 'verified'])->name('update.ticket.column');
+
 
 Route::get('/ticket-show', function () {
     return Inertia::render('TicketShow');

@@ -56,6 +56,9 @@ Route::get('/admin-dashboard', function () {
 Route::get('/cms', [ArticleController::class, 'index'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.index');
 
 Route::post('/cms', [ArticleController::class, 'store'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.store');
+Route::put('/article/{id}', [ArticleController::class, 'update'])->middleware(['auth', 'verified', 'role:facilitators'])->name('articles.update');
+Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->middleware(['auth', 'verified', 'role:facilitators'])->name('article.destroy');
+
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->middleware(['auth', 'verified'])->name('article.show');
 
 

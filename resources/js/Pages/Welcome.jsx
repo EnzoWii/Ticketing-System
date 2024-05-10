@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react'
 import helpdeskimage from '../../../public/images/helpdeskimg.svg'
 import Cards from '@/Components/Cards'
 import { motion } from 'framer-motion';
-function Welcome({latestArticle}) {
+function Welcome({ latestArticle }) {
     const [showScrollButton, setShowScrollButton] = useState(false);
     console.log(latestArticle)
     useEffect(() => {
@@ -59,23 +59,24 @@ function Welcome({latestArticle}) {
                 <div className='flex justify-center flex-wrap gap-8 mt-10'>
                     {
                         latestArticle.map((article) => {
-                           return <Cards title={article.title} subtext='Streamline workload with our ticketing system.' />
+                            return <Cards image={article.image} title={article.title} subtext={article.subtext} />
                         })
                     }
-                   
-                  
+
+
 
                 </div>
 
             </div>
             {showScrollButton &&
                 <motion.div
-                    initial={{ opacity: 0, y: 40, scale: 0 }}
-                    animate={{ opacity: showScrollButton ? 1 : 0, y: showScrollButton ? 0 : 40, scale: showScrollButton ? 1 : 0 }}
-                    exit={{ opacity: 0, y: 40 }}
-                    transition={{
-                        duration: 0.2
-                    }} className='fixed  bottom-5 left-10 bg-blue-900  text-white px-2 py-1 rounded-md cursor-pointer' onClick={scrollToTop}>
+                    initial={{ opacity: 0, y: 50, scale: 0 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 50, scale: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className='fixed bottom-5 left-10 bg-blue-900 text-white px-2 py-1 rounded-md cursor-pointer'
+                    onClick={scrollToTop}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                     </svg>

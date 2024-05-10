@@ -21,6 +21,12 @@ class ArticleController extends Controller
             'article' => $article,
         ]);
     }
+    public function getFive(){
+        $latestArticles = Article::orderBy('created_at', 'desc')->take(5)->get();
+        return Inertia::render('Welcome', [
+            'latestArticle' => $latestArticles,
+        ]);
+    }
     public function store(Request $request)
     {
         $request->validate([

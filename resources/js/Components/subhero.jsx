@@ -3,7 +3,6 @@ import STI from '@/Components/images/sticomputer.jpg';
 import BeSTI from '@/Components/images/BeSTI.jpg';
 
 function SubHero() {
-  const [faqVisibility, setFaqVisibility] = useState({});
   const [ticketFormData, setTicketFormData] = useState({
     name: '',
     email: '',
@@ -35,54 +34,16 @@ function SubHero() {
     setIsTicketModalOpen(false);
   };
 
-  const faqs = [
-    { question: 'What is the IT helpdesk ticketing system?', answer: '... answer ...' },
-    { question: 'How do I submit a ticket?', answer: '... answer ...' },
-    { question: 'Is the ticketing system available 24/7?', answer: '... answer ...' },
-    { question: 'Can I track the progress of my ticket?', answer: '... answer ...' },
-    { question: 'How long does it take to resolve a ticket?', answer: '... answer ...' },
-    // Add more FAQs as needed
-  ];
 
-  const toggleFaq = (index) => {
-    setFaqVisibility((prevVisibility) => ({
-      ...prevVisibility,
-      [index]: !prevVisibility[index],
-    }));
-  };
+  
 
   return (
     <>
-      <div>
-        <img className='pt-1 w-full h-[70vh] object-cover' src={BeSTI} alt="" />
-      </div>
+      
 
       <div className="py-1">
         <div className="max-w-full mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white overflow-hidden shadow-sm mt-10 flex gap-10">
-            <img className='h-2/4 w-2/4' src={STI} alt="STI" />
-            <div className='px-10 py-1'>
-              <h1 className='font-bold text-3xl mt-5 mb-5'>Dashboard</h1> {/* Dashboard Section */}
-              <p className='text-1xl px-1'>Dashboard content goes here...</p>
-            </div>
-          </div>
-
-          <div className="mt-10 bg-gray-100 p-6 rounded-lg">
-            <h2 className="font-bold text-2xl mb-4 text-gray-800">Frequently Asked Questions (FAQs)</h2> {/* FAQs Section */}
-            <div className="space-y-2">
-              {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-gray-200 pb-4">
-                  <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleFaq(index)}>
-                    <h3 className="font-semibold text-gray-800">{faq.question}</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${faqVisibility[index] ? 'transform rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                  {faqVisibility[index] && <p className="text-gray-700">{faq.answer}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
+      
         </div>
       </div>
     </>

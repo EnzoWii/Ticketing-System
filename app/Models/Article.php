@@ -11,5 +11,5 @@ class Article extends Model
 
     protected $table = 'articles'; // Specify the table name if different from the model name
 
-    protected $fillable = ['title', 'subtext','content']; // Specify the fillable attributes
+    protected $fillable = ['title', 'content']; // Specify the fillable attributes
 }

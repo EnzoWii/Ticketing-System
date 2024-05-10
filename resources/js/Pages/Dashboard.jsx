@@ -7,17 +7,16 @@ import AdminDashboard from './AdminDashboard';
 
 export default function Dashboard({ auth }) {
     return (
-       <div>
-        {
-            auth.user.roles == 'users' && <UserDashboard auth={auth}/>
-
-        }
-        {
-            auth.user.roles == 'facilitators' && <LabDashboard auth={auth}/>
-        }
-         {
-            auth.user.roles == 'admin' && <AdminDashboard auth={auth}/>
-        }
-       </div>
+        <div>
+            {
+                auth.user.roles == 'users' && <UserDashboard auth={auth} />
+            }
+            {
+                auth.user.roles == 'facilitators' && <LabDashboard auth={auth} />
+            }
+            {
+                auth.user.roles == 'admin' && <AdminDashboard auth={auth} />
+            }
+        </div>
     );
 }

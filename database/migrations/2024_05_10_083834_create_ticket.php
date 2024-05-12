@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('ticket', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->string('category');
             $table->string('issue_type');
             $table->longText('description');

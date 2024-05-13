@@ -6,7 +6,7 @@ import { FaFire } from "react-icons/fa";
 export const CustomKanban = ({tickets}) => {
   
   return (
-    <div className="h-screen w-full border-gray-400 text-neutral-50">
+    <div className="border-gray-400 text-neutral-50">
       <Board tickets={tickets}/>
     </div>
   );
@@ -20,7 +20,8 @@ console.log(cards)
 
 
   return (
-    <div className="flex h-full w-full gap-3 overflow-scroll p-12">
+    //     <div className="flex h-full w-full gap-3 overflow-scroll p-12">
+    <div className="flex gap-3 p-12">
       <Column
         title="Backlog"
         column="backlog"
@@ -116,10 +117,6 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
     }
   };
   
-  
-
-  
-
   const handleDragOver = (e) => {
     e.preventDefault();
     highlightIndicator(e);
@@ -361,4 +358,5 @@ const DEFAULT_CARDS = [
     id: "10",
     column: "done",
   },
+  
 ];  

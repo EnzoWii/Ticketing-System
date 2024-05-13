@@ -2,6 +2,20 @@ import React, { useState } from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import FacilitatorLayout from '@/Layouts/AuthenticatedLayout';
 
+const TicketCard = ({ title, count, color }) => {
+  const ticketClasses = "bg-white shadow rounded-lg p-4 flex items-center justify-between";
+  const textClasses = "text-lg font-semibold";
+
+  return (
+    <div className={ticketClasses}>
+      <div>
+        <h2 className={textClasses}>{title}</h2>
+        <p className={`text-3xl font-bold ${color}`}>{count}</p>
+      </div>
+    </div>
+  );
+};
+
 const TicketBox = ({ ticket, onViewClick }) => (
   <div className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
     <p className="font-semibold text-lg mb-2">Ticket Number: {ticket.number}</p>
@@ -56,6 +70,15 @@ function Tickets({ auth }) {
           <h1 className="text-3xl font-bold">TICKETS</h1>
           <p className="text-sm">TRACK YOUR SENT TICKETS HERE</p>
         </header>
+
+        <div className="mt-4"> {/* Added padding here */}
+          {/* Ticket cards */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <TicketCard title="Total Tickets" count={tickets.length} />
+            <TicketCard title="On-Going Tickets" count={0} color="text-yellow-500" />
+            <TicketCard title="Resolved Tickets" count={0} color="text-green-500" />
+          </div>
+        </div>
 
         <div className="mt-4"> {/* Added padding here */}
           {/* Ticket boxes */}

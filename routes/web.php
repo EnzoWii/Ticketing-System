@@ -82,9 +82,7 @@ Route::get('/tickets', [TicketController::class, 'index'])->middleware(['auth', 
 Route::put('/tickets/{id}', [TicketController::class, 'updateColumn'])->middleware(['auth', 'verified'])->name('update.ticket.column');
 
 
-Route::get('/ticket-show', function () {
-    return Inertia::render('TicketShow');
-})->middleware(['auth', 'verified'])->name('TicketShow');
+Route::get('/ticket-show/{id}', [LabController::class, 'show'])->middleware(['auth', 'verified'])->name('TicketShow');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

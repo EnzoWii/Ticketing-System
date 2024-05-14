@@ -81,12 +81,13 @@ console.log(Tickets);
                   <p className="text-sm mb-1">
                     Description: {truncateText(ticket.description, 100)}
                   </p>
+                  <a href={`/ticket-show/${ticket.id}`}>
                   <button
-                    onClick={() => handleViewTicket(ticket.id)}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2"
                   >
                     View
                   </button>
+                  </a>
                 </div>
               ))}
             </div>

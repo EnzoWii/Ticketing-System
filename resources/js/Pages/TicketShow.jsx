@@ -22,7 +22,7 @@ const Sidebar = ({ assignedTo, priority, status }) => {
 };
 
 
-function TicketShow({ auth }) {
+function TicketShow({ auth, Ticket }) {
   // State variables for form data
   const [comment, setComment] = useState('');
   const [attachedPicture, setAttachedPicture] = useState(null);
@@ -34,6 +34,8 @@ function TicketShow({ auth }) {
     month: 'long',
     day: 'numeric',
   });
+
+console.log(Ticket);
 
   // Function to handle comment changes
   const handleCommentChange = (e) => {
@@ -78,8 +80,9 @@ function TicketShow({ auth }) {
       <div className="flex items-center justify-center h-full pt-2">
         {/* Sidebar */}
         <div className="mr-4">
-          <Sidebar assignedTo="John Doe" priority="High" status="Open" />
+          <Sidebar assignedTo={Ticket.assigned_to} priority={Ticket.priority} status={Ticket.status} />
         </div>
+
 
         {/* Main content */}
         <div className="bg-white p-8 rounded-lg w-full sm:w-5/6 lg:w-3/4 xl:w-1/2">
@@ -91,7 +94,7 @@ function TicketShow({ auth }) {
               <label className="block text-sm font-medium text-gray-700">Category:</label>
               <input
                 type="text"
-                value="Technical"
+                value={Ticket.category}
                 readOnly
                 className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100"
               />
@@ -100,7 +103,7 @@ function TicketShow({ auth }) {
               <label className="block text-sm font-medium text-gray-700">Issue Type:</label>
               <input
                 type="text"
-                value="Problem"
+                value={Ticket.issue_type}
                 readOnly
                 className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100"
               />
@@ -109,7 +112,7 @@ function TicketShow({ auth }) {
               <label className="block text-sm font-medium text-gray-700">Issue Description:</label>
               <textarea
                 rows="4"
-                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et magna at leo tempus pharetra."
+                value={Ticket.description}
                 readOnly
                 className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100"
               ></textarea>

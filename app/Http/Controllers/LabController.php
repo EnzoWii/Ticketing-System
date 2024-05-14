@@ -20,7 +20,7 @@ class LabController extends Controller
     {
         $Ticket = TicketModel::findOrFail($id);
 
-        return Inertia::render('Ticket', [
+        return Inertia::render('TicketShow', [
             'Ticket' => $Ticket,
         ]);
     }

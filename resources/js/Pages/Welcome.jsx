@@ -5,6 +5,8 @@ import helpdeskimage from '../../../public/images/helpdeskimg.svg'
 import Cards from '@/Components/Cards'
 import { motion } from 'framer-motion';
 function Welcome({ latestArticle, auth }) {
+    
+    //SCROLL
     console.log(auth)
     const [showScrollButton, setShowScrollButton] = useState(false);
     console.log(latestArticle)
@@ -29,26 +31,6 @@ function Welcome({ latestArticle, auth }) {
         })
     }
 
-    const [faqVisibility, setFaqVisibility] = useState({});
-
-    const faqs = [
-        { question: 'What is the IT helpdesk ticketing system?', answer: 'STI College Bacoor utilizes an IT helpdesk ticketing system to efficiently manage and address technical issues reported by students, faculty, and staff. This system facilitates streamlined communication, ticket tracking, and issue resolution to minimize disruptions to teaching and learning activities. ' },
-        {
-            question: 'How do I submit a ticket?', answer: `You can submit a ticket by accessing the IT helpdesk's online portal or by sending an email to the provided support address at STI College Bacoor.Alternatively, you can inquire about other available channels, such as phone support or in-person assistance during designated hours.` },
-        { question: 'Is the ticketing system available 24/7?', answer: `The availability of the ticketing system at STI College Bacoor may vary depending on their IT department's operating hours. It's recommended to check with the college's IT department for specific details on when the system is accessible for submitting tickets.` },
-        { question: 'Can I track the progress of my ticket?', answer: `You can monitor your ticket's progress through the IT helpdesk system at STI College Bacoor, ensuring you stay informed about any updates or resolutions to your reported issue. This feature enables you to stay engaged and aware of the status of your request.` },
-        { question: 'How long does it take to resolve a ticket?', answer: `The time it takes to resolve a ticket at STI College Bacoor's IT helpdesk may vary depending on factors such as the complexity of the issue and the current workload. Typically, the IT team strives to address tickets promptly, aiming to provide timely resolutions to reported problems.
-
-        ` },
-        // Add more FAQs as needed
-    ];
-
-    const toggleFaq = (index) => {
-        setFaqVisibility((prevVisibility) => ({
-            ...prevVisibility,
-            [index]: !prevVisibility[index],
-        }));
-    };
     return (
         <>
 
@@ -90,29 +72,6 @@ function Welcome({ latestArticle, auth }) {
                         })
                     }
 
-
-
-                </div>
-            </div>
-
-
-            <div className='mx-16 mt-14'>
-                <h1 className="font-bold text-4xl mb-4 text-black text-center">Frequently Asked Questions (FAQs)</h1> {/* FAQs Section */}
-                <div className="mt-10 bg-gray-100 p-6 rounded-lg">
-
-                    <div className="space-y-2">
-                        {faqs.map((faq, index) => (
-                            <div key={index} className="border-b border-gray-200 pb-4">
-                                <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleFaq(index)}>
-                                    <h3 className="font-semibold text-gray-800">{faq.question}</h3>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${faqVisibility[index] ? 'transform rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                                {faqVisibility[index] && <p className="text-gray-700">{faq.answer}</p>}
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
 

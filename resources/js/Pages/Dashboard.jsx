@@ -17,7 +17,7 @@ export default function Dashboard({ auth,tickets }) {
             }
             {
                 auth.user.roles == 'admin' && <AdminDashboard auth={auth} />
-            }
+            }            
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import FacilitatorLayout from '@/Layouts/AuthenticatedLayout';
 
@@ -11,26 +11,30 @@ const truncateText = (text, maxLength) => {
 
 const TicketBox = ({ ticket, onViewClick }) => (
   <div className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-    <p className="font-semibold text-lg mb-2">Ticket Number: {ticket.number}</p>
+    <p className="font-semibold text-lg mb-2">Ticket Number: {ticket.id}</p>
     <p className="text-sm mb-1">Category: {ticket.category}</p>
-    <p className="text-sm mb-1">Issue Type: {ticket.issueType}</p>
-    <p className="text-sm mb-1">Assigned to: {ticket.assignedTo}</p>
+    <p className="text-sm mb-1">Issue Type: {ticket.issue_type}</p>
+    <p className="text-sm mb-1">Assigned to: {ticket.assigned_to}</p>
     <p className="text-sm mb-1">Priority: {ticket.priority}</p>
     <p className="text-sm mb-1">Status: {ticket.status}</p>
-    <p className="text-sm mb-1">Description: {truncateText(ticket.description, 100)}</p> {/* Truncate the description */}
+    <p className="text-sm mb-1">Description: {truncateText(ticket.description, 100)}</p>
     <button onClick={() => onViewClick(ticket.id)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2">View</button>
   </div>
 );
 
-function Tickets({ auth }) {
-  const { data, setData, post } = useForm({
+function Tickets({ auth, tickets: initialTickets }) {
+  const { data, setData, post, reset } = useForm({
     category: '',
     issue_type: '',
-    description: '', // Initialize description
+    description: '',
+    screenshot: null,
   });
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
-  const [tickets, setTickets] = useState([]);
-  const [ticketCounter, setTicketCounter] = useState(1);
+  const [tickets, setTickets] = useState(initialTickets);
+
+  useEffect(() => {
+    setTickets(initialTickets);
+  }, [initialTickets]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,18 +47,20 @@ function Tickets({ auth }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTicket = {
-      number: ticketCounter,
-      category: data.category,
-      issueType: data.issue_type,
-      description: data.description, // Add the description here
-      assignedTo: 'n/a', // Set default value to 'n/a'
-      priority: 'n/a', // Assuming priority is also set to 'n/a' by default
-      status: 'Open',
-    };
-    setTickets((prevTickets) => [...prevTickets, newTicket]);
-    setTicketCounter((prevCounter) => prevCounter + 1);
-    setIsTicketModalOpen(false);
+    post('/tickets', {
+      preserveScroll: true,
+      onSuccess: (page) => {
+        setTickets(page.props.tickets);
+        reset();
+        setIsTicketModalOpen(false);
+      },
+      onError: (errors) => {
+        console.error('Error submitting ticket:', errors);
+      },
+    });
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000);
   };
 
   const handleViewTicket = (ticketId) => {
@@ -69,21 +75,18 @@ function Tickets({ auth }) {
           <p className="text-sm">TRACK YOUR SENT TICKETS HERE</p>
         </header>
 
-        <div className="mt-4"> {/* Added padding here */}
-          {/* Ticket boxes */}
+        <div className="mt-4">
           <div className="flex flex-wrap w-full gap-4">
             {tickets.map((ticket) => (
-              <TicketBox key={ticket.number} ticket={ticket} onViewClick={handleViewTicket} />
+              <TicketBox key={ticket.id} ticket={ticket} onViewClick={handleViewTicket} />
             ))}
           </div>
         </div>
 
-        {/* Ticket Submission Section */}
         <div className="mt-10 bg-gray-100 p-6 rounded-lg">
           <button onClick={() => setIsTicketModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Create a Ticket</button>
         </div>
 
-        {/* Ticket Submission Modal */}
         {isTicketModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-50">
             <div className="bg-white p-8 rounded-lg w-full sm:w-96">
@@ -115,7 +118,7 @@ function Tickets({ auth }) {
                   <input type="file" id="screenshot" name="screenshot" onChange={handleFileChange} className="w-full border border-gray-300 p-2 rounded-md" />
                 </div>
                 <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-900 transition-colors">Submit</button>
-                <button onClick={() => setIsTicketModalOpen(false)} className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors">Cancel</button>
+                <button type="button" onClick={() => setIsTicketModalOpen(false)} className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors">Cancel</button>
               </form>
             </div>
           </div>

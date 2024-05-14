@@ -3,9 +3,11 @@ import { Head } from '@inertiajs/react';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal'; // Import Modal from react-modal
 
-export default function AdminDashboard({ auth }) {
+export default function AdminDashboard({ auth, Tickets }) {
     const [modalIsOpen, setModalIsOpen] = useState(false); // State for modal
     const [newUser, setNewUser] = useState({ name: '', email: '', password: '' }); // State for new user data
+
+    console.log();
 
     useEffect(() => {
         // Fetch users data here if needed

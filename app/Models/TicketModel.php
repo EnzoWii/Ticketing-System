@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TicketModel extends Model
 {
     use HasFactory;
-    protected $table = 'ticket';
-    protected $fillable = ['assigned_to', 'category', 'issue_type', 'description', 'screenshot', 'priority', 'status', 'column'];
+    protected $table = 'tickets';
+    protected $fillable = ['assigned_to', 'category', 'issue_type', 'description', 
+    'screenshot', 'priority', 'status', 'column'];
 }

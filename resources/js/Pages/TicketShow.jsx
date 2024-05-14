@@ -83,18 +83,10 @@ function TicketShow({ auth }) {
 
         {/* Main content */}
         <div className="bg-white p-8 rounded-lg w-full sm:w-5/6 lg:w-3/4 xl:w-1/2">
-          <h2 className="font-bold text-2xl mb-4 text-gray-800 text-center">Submit a Ticket</h2>
+          <h2 className="font-bold text-2xl mb-4 text-gray-800 text-center">Your Ticket</h2>
           <p className="text-sm text-gray-500 mb-2 text-right">{currentDate}</p>
           <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Title:</label>
-              <input
-                type="text"
-                value="Example Title"
-                readOnly
-                className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100"
-              />
-            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700">Category:</label>
               <input

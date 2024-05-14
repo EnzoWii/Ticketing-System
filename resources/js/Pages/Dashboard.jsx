@@ -5,19 +5,20 @@ import UserDashboard from './UserDashboard';
 import LabDashboard from './LabDashboard';
 import AdminDashboard from './AdminDashboard';
 
-export default function Dashboard({ auth,tickets }) {
+export default function Dashboard({ auth , tickets , latestArticles }) {
+
 
     return (
         <div>
             {
-                auth.user.roles == 'users' && <UserDashboard auth={auth} />
+                auth.user.roles == 'users' && <UserDashboard auth={auth} latestArticles={latestArticles} />
             }
             {
                 auth.user.roles == 'facilitators' && <LabDashboard auth={auth} tickets={tickets}/>
             }
             {
                 auth.user.roles == 'admin' && <AdminDashboard auth={auth} />
-            }
+            }            
         </div>
     );
 }

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('ticket', function (Blueprint $table) {
             $table->id();
+            $table->int('ID_number');
             $table->string('category');
             $table->string('issue_type');
+            $table->string('assigned_to');
             $table->longText('description');
             $table->string('screenshot')->nullable();
             $table->enum('priority', ['High', 'Low', 'Mid'])->nullable();

@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import FacilitatorLayout from '@/Layouts/AuthenticatedLayout';
 
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength) + '...';
+};
+
 const TicketBox = ({ ticket, onViewClick }) => (
   <div className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
     <p className="font-semibold text-lg mb-2">Ticket Number: {ticket.number}</p>
@@ -10,13 +17,17 @@ const TicketBox = ({ ticket, onViewClick }) => (
     <p className="text-sm mb-1">Assigned to: {ticket.assignedTo}</p>
     <p className="text-sm mb-1">Priority: {ticket.priority}</p>
     <p className="text-sm mb-1">Status: {ticket.status}</p>
-    {/* View button */}
+    <p className="text-sm mb-1">Description: {truncateText(ticket.description, 100)}</p> {/* Truncate the description */}
     <button onClick={() => onViewClick(ticket.id)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2">View</button>
   </div>
 );
 
 function Tickets({ auth }) {
-  const { data, setData, post } = useForm();
+  const { data, setData, post } = useForm({
+    category: '',
+    issue_type: '',
+    description: '', // Initialize description
+  });
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [ticketCounter, setTicketCounter] = useState(1);
@@ -36,6 +47,7 @@ function Tickets({ auth }) {
       number: ticketCounter,
       category: data.category,
       issueType: data.issue_type,
+      description: data.description, // Add the description here
       assignedTo: 'n/a', // Set default value to 'n/a'
       priority: 'n/a', // Assuming priority is also set to 'n/a' by default
       status: 'Open',
@@ -95,7 +107,8 @@ function Tickets({ auth }) {
                   </select>
                 </div>
                 <div>
-                  <textarea id="issue" name="description" value={data.description} onChange={handleInputChange} rows="4" placeholder="Issue Description" className="w-full border border-gray-300 p-2 rounded-md" required></textarea>
+                  <label htmlFor="issue" className="block text-sm font-medium text-gray-700">Issue Description</label>
+                  <textarea id="issue" name="description" value={data.description} onChange={handleInputChange} rows="4" placeholder="Issue Description" className="w-full border border-gray-300 p-2 rounded-md resize-none" required></textarea>
                 </div>
                 <div>
                   <label htmlFor="screenshot" className="block text-sm font-medium text-gray-700">Screenshot</label>

@@ -1,36 +1,34 @@
 import React, { useState } from 'react';
 import FacilitatorLayout from '@/Layouts/facilitatorLayout';
 
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength) + '...';
+};
+
 function Tickets({ auth }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [numTicketsReceived, setNumTicketsReceived] = useState(0); // State for number of tickets received today
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setTicketFormData({
-      ...ticketFormData,
-      [name]: value
-    });
-  };
-
-  const handleFileChange = (e) => {
-    setTicketFormData({
-      ...ticketFormData,
-      attachment: e.target.files[0]
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Your submit logic here
-  };
+  const [tickets] = useState([
+    {
+      id: 'TCID01',
+      category: 'Network',
+      issueType: 'Problem',
+      description: 'This is an example of a ticket description. It contains details about the issue that needs to be resolved. The description might be long, so it needs to be truncated when displayed.',
+      assignedTo: 'John Doe',
+      priority: 'High',
+      status: 'Open',
+      date: '04/06/2024',
+    }
+  ]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
   const handleViewTicket = (ticketId) => {
-    // Handle view ticket logic, e.g., navigate to ticket details page
     console.log(`View ticket ${ticketId}`);
   };
 
@@ -67,19 +65,19 @@ function Tickets({ auth }) {
 
             {/* Ticket cards */}
             <div className="flex flex-wrap w-full md:w-3/4 gap-4">
-              {/* Example ticket card */}
-              <div className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-                <p className="font-semibold text-lg mb-2">Ticket ID: 1</p>
-                <p className="text-sm mb-1">Department: Example Department 1</p>
-                <p className="text-sm mb-1">Date: 04/06/2024</p>
-                <p className="text-sm mb-1">Subject: Example Subject 1</p>
-                <p className="text-sm mb-1">Assigned to: Assigned To 1</p>
-                <p className="text-sm mb-1">Priority: High</p>
-                <p className="text-sm mb-1">Status: Open</p>
-                {/* View button */}
-                <button onClick={() => handleViewTicket(1)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2">View</button>
-              </div>
-              {/* Add more ticket cards as needed */}
+              {tickets.map((ticket) => (
+                <div key={ticket.id} className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                  <p className="font-semibold text-lg mb-2">Ticket ID: {ticket.id}</p>
+                  <p className="text-sm mb-1">Category: {ticket.category}</p>
+                  <p className="text-sm mb-1">Issue Type: {ticket.issueType}</p>
+                  <p className="text-sm mb-1">Assigned to: {ticket.assignedTo}</p>
+                  <p className="text-sm mb-1">Priority: {ticket.priority}</p>
+                  <p className="text-sm mb-1">Status: {ticket.status}</p>
+                  <p className="text-sm mb-1">Date: {ticket.date}</p>
+                  <p className="text-sm mb-1">Description: {truncateText(ticket.description, 100)}</p> {/* Truncate the description */}
+                  <button onClick={() => handleViewTicket(ticket.id)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2">View</button>
+                </div>
+              ))}
             </div>
           </div>
         </div>

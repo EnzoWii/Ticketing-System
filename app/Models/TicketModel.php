@@ -9,5 +9,5 @@ class TicketModel extends Model
 {
     use HasFactory;
     protected $table = 'ticket';
-    protected $fillable = ['title', 'category', 'issue_type', 'description', 'screenshot', 'priority', 'status', 'column'];
+    protected $fillable = ['assigned_to', 'category', 'issue_type', 'description', 'screenshot', 'priority', 'status', 'column'];
 }

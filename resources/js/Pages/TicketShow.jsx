@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/facilitatorLayout';
 
 const Sidebar = ({ assignedTo, priority, status }) => {
   return (

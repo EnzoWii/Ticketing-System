@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 
 function UserDashboard({ latestArticles, auth }) {
 
-    
+    const [searchTerm, setSearchTerm] = useState('');
 
     // Scroll to top button
     console.log(auth)
@@ -35,6 +35,16 @@ function UserDashboard({ latestArticles, auth }) {
             behavior: 'smooth'
         })
     }
+
+    const filterArticles = (article) => {
+        if (!searchTerm) return true;
+        const searchRegex = new RegExp(searchTerm, 'i');
+        return (
+          searchRegex.test(article.title) ||
+          searchRegex.test(article.subtext) ||
+          searchRegex.test(article.category)
+        );
+      };
 
     // Accordion component defined within UserDashboard
     const Accordion = () => {
@@ -175,28 +185,47 @@ function UserDashboard({ latestArticles, auth }) {
 
     return (
         <AuthenticatedLayout user={auth.user}>
-            <Head title="Dashboard" />
-            
+        <Head title="Dashboard" />
+  
+      {/* Latest Articles */}
+      <div className="mb-14">
+        <div className="bg-gray-100 p-8">
+          <header className="bg-blue-500 text-white text-center py-4">
+            <h1 className="text-5xl font-bold pb-5">Articles</h1>
+            <p className="text-sm">View articles made by the Laboratory Facilitators</p>
+          </header>
+        </div>
+
+        {/* Search bar */}
+        <div className="flex justify-center mt-8 mb-8">
+          <div className="relative w-full max-w-lg">
+            <input
+              type="text"
+              placeholder="Search an Article"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full h-12 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-lg"
+            />
+            <button
+              className="absolute inset-y-0 right-0 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none text-lg"
+              onClick={() => setSearchTerm('')}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div className="flex justify-center flex-wrap gap-8 mt-10">
+          {latestArticles.filter(filterArticles).map((article) => (
+            <a key={article.id} href={`/articles/${article.id}`} className="w-[22%]">
+              <Cards image={article.image} title={article.title} subtext={article.subtext} />
+            </a>
+          ))}
+        </div>
+      </div>
+
             {/* FAQ Section */}
             <Accordion />
-
-{/* Latest Articles */}
-<div className='mt-14'>
-                <div>
-                    <h1 className='text-4xl text-center font-bold'>Latest Articles</h1>
-                </div>
-                <div className='flex justify-center flex-wrap gap-8 mt-10'>
-                    {
-                        latestArticles.map((article) => {
-                            return <a href={`/articles/${article.id}`} className='w-[22%]'>
-                            <Cards image={article.image} title={article.title} subtext={article.subtext} />
-
-                            </a>
-                        })
-                    }
-
-                </div>
-            </div>
 
             {/* Scroll to top button */}
             {showScrollButton && (

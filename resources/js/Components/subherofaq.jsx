@@ -1,15 +1,15 @@
 import React from 'react';
-import projector from '@/Components/images/Assets.jpg';
-import account from '@/Components/images/Accounts.jpg';
-import internet from '@/Components/images/Internet.jpeg';
-import technical from '@/Components/images/Technical.jpg';
+import projector from '@/Components/images/AssetsIcon.svg';
+import account from '@/Components/images/AccountIcon.svg';
+import internet from '@/Components/images/NetworkIcon.svg';
+import technical from '@/Components/images/TechnicalIcon.svg';
 
 function SubHeroFAQ() {
   return (
     <div className="bg-gray-100 min-h-screen p-8">
       <header className="bg-blue-500 text-white text-center py-4">
-        <h1 className="text-3xl font-bold">TICKETS</h1>
-        <p className="text-sm">TRACK YOUR SENT TICKETS HERE</p>
+        <h1 className="text-5xl font-bold pb-5">Articles</h1>
+        <p className="text-sm">View articles made by the Laboratory Facilitators</p>
       </header>
 
       {/* Search bar */}

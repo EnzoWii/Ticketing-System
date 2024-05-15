@@ -71,7 +71,7 @@ function Tickets({ auth, tickets: initialTickets }) {
     <FacilitatorLayout user={auth.user}>
       <div className="bg-gray-100 min-h-screen p-8">
         <header className="bg-blue-500 text-white text-center py-4">
-          <h1 className="text-3xl font-bold">TICKETS</h1>
+          <h1 className="text-5xl font-bold pb-5">TICKETS</h1>
           <p className="text-sm">TRACK YOUR SENT TICKETS HERE</p>
         </header>
 

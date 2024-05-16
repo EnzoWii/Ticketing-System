@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import STIBacoorLogo from '../Assets/STIBacoorLogo.gif';
+import HelpDeskSystemLogo from '../Assets/HelpDeskLogo.png';
 import { Link } from '@inertiajs/react';
 import helpdeskimage from '../../../public/images/helpdeskimg.svg';
 import Cards from '@/Components/Cards';
@@ -35,8 +36,9 @@ function Welcome({ latestArticle, auth }) {
     return (
         <div className="w-full bg-slate-100 pt-10 pb-20"> {/* Add padding-bottom here */}
             <div className='w-full h-16 flex justify-between items-center'>
-                <div className='ml-20'>
-                    <img src={STIBacoorLogo} className='w-20' />
+            <div className='mt-20 ml-20 flex'>
+                {/* <img src={STIBacoorLogo} className='w-32 object-contain' alt="STI Bacoor Logo" />*/}
+                <img src={HelpDeskSystemLogo} className='w-40 object-contain' alt="Help Desk System Logo" />
                 </div>
                 <div className='mr-20'>
                     { auth.user == null && <Link href={route('login')} className='bg-blue-900 text-white px-12 py-2 rounded-md'>SIGN IN</Link>}

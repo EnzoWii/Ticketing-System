@@ -9,18 +9,26 @@ const truncateText = (text, maxLength) => {
   return text.substring(0, maxLength) + '...';
 };
 
-const TicketBox = ({ ticket, onViewClick }) => (
-  <div className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-    <p className="font-semibold text-lg mb-2">Ticket Number: {ticket.id}</p>
-    <p className="text-sm mb-1">Category: {ticket.category}</p>
-    <p className="text-sm mb-1">Issue Type: {ticket.issue_type}</p>
-    <p className="text-sm mb-1">Assigned to: {ticket.assigned_to}</p>
-    <p className="text-sm mb-1">Priority: {ticket.priority}</p>
-    <p className="text-sm mb-1">Status: {ticket.status}</p>
-    <p className="text-sm mb-1">Description: {truncateText(ticket.description, 100)}</p>
-    <button onClick={() => onViewClick(ticket.id)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2">View</button>
-  </div>
-);
+const TicketBox = ({ ticket, onViewClick }) => {
+  const getStatusColor = () => {
+    return ticket.status === 'open' ? 'text-green-500' : '';
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <p className="font-semibold text-lg mb-2">Ticket Number: {ticket.id}</p>
+      <p className="text-sm mb-1">Category: {ticket.category}</p>
+      <p className="text-sm mb-1">Issue Type: {ticket.issue_type}</p>
+      <p className="text-sm mb-1">Assigned to: {ticket.assigned_to}</p>
+      <p className="text-sm mb-1">Priority: {ticket.priority}</p>
+      <p className={`text-sm mb-1 ${getStatusColor()}`}>Status: {ticket.status}</p>
+      <div className="description-container" style={{ maxHeight: '3.6em', overflow: 'hidden' }}>
+        <p className="text-sm mb-1">Description: {truncateText(ticket.description, 100)}</p>
+      </div>
+      <button onClick={() => onViewClick(ticket.id)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-2">View</button>
+    </div>
+  );
+};
 
 function Tickets({ auth, tickets: initialTickets }) {
   const { data, setData, post, reset } = useForm({

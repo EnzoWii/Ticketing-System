@@ -46,6 +46,10 @@ const CMSPage = ({ auth, articles }) => {
         setCreateModalOpen(false); // Close create modal after submission
     };
 
+    const handleViewArticle = (id) => {
+        window.location.href = `articles/${id}`;
+    }
+
     return (
         <Authenticated user={auth.user}>
             <div className="flex gap-10 py-8 px-4">
@@ -66,12 +70,15 @@ const CMSPage = ({ auth, articles }) => {
                     <h2 className="text-xl font-semibold mb-4">Articles</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                         {articles.map((article) => (
-                            <div key={article.id} className="border border-gray-300 bg-white rounded-lg p-4">
-                                <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
-                                <div className='flex gap-2'>
-                                    <span className='flex justify-center items-center gap-2 cursor-pointer hover:bg-green-400 p-1 rounded'> <PencilIcon color="green" size={15} />Edit</span>
-                                    <span className='flex justify-center items-center gap-2 cursor-pointer hover:bg-red-400 p-1 rounded' onClick={() => openDeleteModal(article.id)}> <Trash color="Red" size={15} />Delete</span>
-                                    <span className='flex justify-center items-center gap-2 cursor-pointer hover:bg-slate-500 p-1 rounded' onClick={() => window.location.href = `articles/${article.id}`}> <ViewIcon color="Black" size={15} />View</span>
+                            <div key={article.id} className="border border-gray-300 bg-white rounded-lg p-4 flex flex-col justify-between">
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
+                                    {/* Edit, Delete, and View buttons */}
+                                    <div className='flex justify-between items-center'>
+                                        <span className='flex justify-center items-center gap-2 cursor-pointer hover:bg-green-400 p-1 rounded' title="Edit"> <PencilIcon color="green" size={13} />Edit</span>
+                                        <span className='flex justify-center items-center gap-2 cursor-pointer hover:bg-red-400 p-1 rounded' onClick={() => openDeleteModal(article.id)} title="Delete"> <Trash color="Red" size={13} />Delete</span>
+                                        <span className='flex justify-center items-center gap-2 cursor-pointer hover:bg-slate-500 p-1 rounded' onClick={() => handleViewArticle(article.id)} title="View"> <ViewIcon color="Black" size={13} />View</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -129,7 +136,8 @@ const CMSPage = ({ auth, articles }) => {
                     <div className="flex justify-end">
                         <button className="bg-red-500 text-white px-4 py-2 mr-2 rounded-md" onClick={closeDeleteModal}>Cancel</button>
                         <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={handleDeleteArticle}>Delete</button>
-                    </div>
+                    </div
+>
                 </div>
             </Modal>
         </Authenticated>

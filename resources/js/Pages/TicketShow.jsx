@@ -7,11 +7,20 @@ const Sidebar = ({ assignedTo, priority, status }) => {
       <h3 className="font-semibold text-lg mb-2">Ticket Details</h3>
       <div className="mb-2">
         <p className="text-sm font-medium text-gray-700">Assigned to:</p>
-        <p className="text-sm text-gray-600">{assignedTo}</p>
+        <input
+          type="text"
+          value={assignedTo}
+          className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100"
+          readOnly
+        />
       </div>
       <div className="mb-2">
         <p className="text-sm font-medium text-gray-700">Priority:</p>
-        <p className="text-sm text-gray-600">{priority}</p>
+        <select className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100">
+          <option value="low" style={{ color: 'green' }}>Low</option>
+          <option value="medium" style={{ color: 'yellow' }}>Medium</option>
+          <option value="high" style={{ color: 'red' }}>High</option>
+        </select>
       </div>
       <div>
         <p className="text-sm font-medium text-gray-700">Status:</p>
@@ -21,13 +30,11 @@ const Sidebar = ({ assignedTo, priority, status }) => {
   );
 };
 
-
 function TicketShow({ auth, Ticket }) {
   // State variables for form data
-  const [comment, setComment] = useState('');
+  const [solution, setSolution] = useState(''); // State to store the solution/comment
   const [attachedPicture, setAttachedPicture] = useState(null);
-  const [closeTicketModalOpen, setCloseTicketModalOpen] = useState(false);
-  const [closeTicketReason, setCloseTicketReason] = useState('');
+
   const currentDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -35,44 +42,18 @@ function TicketShow({ auth, Ticket }) {
     day: 'numeric',
   });
 
-console.log(Ticket);
-
-  // Function to handle comment changes
-  const handleCommentChange = (e) => {
+  // Function to handle solution/comment changes
+  const handleSolutionChange = (e) => {
     const value = e.target.value;
-    // Set the comment
-    setComment(value);
+    // Set the solution/comment
+    setSolution(value);
   };
 
-  // Function to handle picture attachment in comment section
-  const handleCommentPictureAttachment = (e) => {
+  // Function to handle picture attachment in solution section
+  const handleSolutionPictureAttachment = (e) => {
     const file = e.target.files[0];
     // Set the attached picture
     setAttachedPicture(file);
-  };
-
-  // Function to handle closing ticket
-  const handleCloseTicket = () => {
-    // Open close ticket modal
-    setCloseTicketModalOpen(true);
-  };
-
-  // Function to confirm closing ticket
-  const confirmCloseTicket = () => {
-    // Perform closing ticket logic here
-    console.log('Ticket closed for reason:', closeTicketReason);
-    // Close close ticket modal
-    setCloseTicketModalOpen(false);
-    // Clear close ticket reason
-    setCloseTicketReason('');
-  };
-
-  // Function to cancel closing ticket
-  const cancelCloseTicket = () => {
-    // Close close ticket modal
-    setCloseTicketModalOpen(false);
-    // Reset close ticket reason
-    setCloseTicketReason('');
   };
 
   return (
@@ -83,13 +64,11 @@ console.log(Ticket);
           <Sidebar assignedTo={Ticket.assigned_to} priority={Ticket.priority} status={Ticket.status} />
         </div>
 
-
         {/* Main content */}
         <div className="bg-white p-8 rounded-lg w-full sm:w-5/6 lg:w-3/4 xl:w-1/2">
           <h2 className="font-bold text-2xl mb-4 text-gray-800 text-center">Your Ticket</h2>
           <p className="text-sm text-gray-500 mb-2 text-right">{currentDate}</p>
           <form className="space-y-4">
-
             <div>
               <label className="block text-sm font-medium text-gray-700">Category:</label>
               <input
@@ -114,40 +93,27 @@ console.log(Ticket);
                 rows="4"
                 value={Ticket.description}
                 readOnly
-                className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100"
+                className="w-full border border-gray-300 p-2 rounded-md text-lg bg-gray-100 resize-none"
               ></textarea>
             </div>
             <div>
-  <label className="block text-sm font-medium text-gray-700">Comment (Lab Facilitator):</label>
-  <div className="relative">
-    <textarea
-      rows="2"
-      value="This is an example comment from the lab facilitator."
-      readOnly
-      className="w-full border border-gray-300 p-2 rounded-md text-sm bg-gray-100"
-    ></textarea>
-    <span className="absolute top-0 right-0 px-2 py-1 bg-blue-500 text-white text-xs font-bold rounded-md">Lab Facilitator</span>
-  </div>
-</div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Your Comment:</label>
+              <label className="block text-sm font-medium text-gray-700">Solution/Comment:</label>
               <textarea
                 rows="2"
-                value={comment}
-                onChange={handleCommentChange}
-                placeholder="Add your comment here..."
-                className="w-full border border-gray-300 p-2 rounded-md text-sm"
+                value={solution}
+                onChange={handleSolutionChange}
+                placeholder="Add your solution/comment here..."
+                className="w-full border border-gray-300 p-2 rounded-md text-sm resize-none"
               ></textarea>
               <div className="flex items-center border border-gray-300 p-2 rounded-md mt-2">
                 <input
                   type="file"
-                  onChange={handleCommentPictureAttachment}
+                  onChange={handleSolutionPictureAttachment}
                   className="hidden"
                   accept="image/*"
-                  id="attachedPictureComment"
+                  id="attachedPictureSolution"
                 />
-                <label htmlFor="attachedPictureComment" className="cursor-pointer flex items-center space-x-2">
+                <label htmlFor="attachedPictureSolution" className="cursor-pointer flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 text-gray-500"
@@ -169,34 +135,17 @@ console.log(Ticket);
                 )}
               </div>
             </div>
-            <div className="flex justify-between">
-              <button onClick={() => {}} className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">Go Back</button>
-              <button onClick={handleCloseTicket} className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Close Ticket</button>
+            <div className="flex justify-end">
+              <button
+                onClick={() => {}}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Send Solution
+              </button>
             </div>
           </form>
         </div>
       </div>
-      {/* Close Ticket Modal */}
-      {closeTicketModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg w-full sm:w-96">
-            <h2 className="font-bold text-2xl mb-4 text-gray-800">Close Ticket</h2>
-            <p>Why do you want to close this ticket?</p>
-            <textarea
-              value={closeTicketReason}
-              onChange={(e) => setCloseTicketReason(e.target.value)}
-              className="w-full border border-gray-300 p-2 rounded-md mt-2"
-              placeholder="Enter reason for closing the ticket..."
-              rows="4"
-            />
-            <div className="flex justify-end mt-4">
-              <button onClick={confirmCloseTicket} className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors mr-2">Confirm</button>
-              <button onClick={cancelCloseTicket} className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* Remaining modal content */}
     </AuthenticatedLayout>
   );
 }

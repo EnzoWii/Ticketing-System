@@ -22,10 +22,10 @@ function LabDashboard({ auth, tickets }) {
   const incompleteTasks = 0; */
   
   // Sample data for the charts, replace these with your actual data
-  const receivedTickets = [10, 20, 30, 40, 50]; // Replace with actual data
-  const openTickets = 40;
-  const resolvedTickets = 60;
-  const totalTicketsOverTime = [5, 10, 15, 20, 25]; // Replace with actual data
+  const receivedTickets = [5, 10, 6, 11, 14]; // Replace with actual data
+  const openTickets = 1;
+  const resolvedTickets = 1;
+  const totalTicketsOverTime = [5, 10, 6, 13, 14]; // Replace with actual data
   const timeLabels = ["Jan", "Feb", "Mar", "Apr", "May"]; // Replace with actual data
 
   return (

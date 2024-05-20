@@ -83,14 +83,6 @@ function Tickets({ auth, tickets: initialTickets }) {
           <p className="text-sm">TRACK YOUR SENT TICKETS HERE</p>
         </header>
 
-        <div className="mt-4">
-          <div className="flex flex-wrap w-full gap-4">
-            {tickets.map((ticket) => (
-              <TicketBox key={ticket.id} ticket={ticket} onViewClick={handleViewTicket} />
-            ))}
-          </div>
-        </div>
-
         <div className="mt-10 bg-gray-100 p-6 rounded-lg">
           <button onClick={() => setIsTicketModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Create a Ticket</button>
         </div>
@@ -126,11 +118,19 @@ function Tickets({ auth, tickets: initialTickets }) {
                   <input type="file" id="screenshot" name="screenshot" onChange={handleFileChange} className="w-full border border-gray-300 p-2 rounded-md" />
                 </div>
                 <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-900 transition-colors">Submit</button>
-                <button type="button" onClick={() => setIsTicketModalOpen(false)} className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors">Cancel</button>
+                <button type="button" onClick={() => setIsTicketModalOpen(false)} className="border border-gray-300 text-gray-700 px-4 py-2 ml-5 rounded-md hover:bg-gray-200 transition-colors">Cancel</button>
               </form>
             </div>
           </div>
         )}
+        <div className="mt-3">
+          <div className="flex flex-wrap w-full gap-4">
+            {tickets.map((ticket) => (
+            <TicketBox key={ticket.id} ticket={ticket} onViewClick={handleViewTicket} />
+            ))}
+          </div>
+        </div>
+        
       </div>
     </FacilitatorLayout>
   );
